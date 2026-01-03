@@ -35,6 +35,8 @@
                 "install -D src/main.py /app/bin/protondrive",
                 "install -D src/controller.py /app/bin/controller.py",
                 "install -D src/interface.ui /app/bin/interface.ui",
+                "install -D org.example.protondrive.desktop /app/share/applications/org.example.protondrive.desktop",
+                "install -D protondrive.svg /app/share/icons/hicolor/scalable/apps/org.example.protondrive.svg",
                 "chmod +x /app/bin/protondrive"
             ],
             "sources": [

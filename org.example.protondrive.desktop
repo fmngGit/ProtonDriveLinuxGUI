@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Proton Drive
+Comment=Proton Drive Client for Linux
+Exec=protondrive
+Icon=org.example.protondrive
+Terminal=false
+Type=Application
+Categories=Network;FileTransfer;
+StartupNotify=true
+keywords=cloud;storage;secure;proton;
