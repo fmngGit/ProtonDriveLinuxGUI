@@ -23,7 +23,7 @@
                 {
                     "type": "archive",
                     "url": "https://downloads.rclone.org/v1.65.0/rclone-v1.65.0-linux-amd64.zip",
-                    "sha256": "5c5ad62d294025a17637257df8903c73491ba90ca76572e9ddcaecae7030cfd2",
+                    "sha256": "9a9f29ed242baec12d423e4cf21b1322ebac1fe738d72f64a3b1b4a45c94b4bf",
                     "strip-components": 1
                 }
             ]
