@@ -1,0 +1,214 @@
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="adw" version="1.0"/>
+  <object class="AdwApplicationWindow" id="ProtonDriveWindow">
+    <property name="title">Proton Drive</property>
+    <property name="default-width">800</property>
+    <property name="default-height">1000</property>
+    <property name="content">
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar"/>
+        </child>
+        <property name="content">
+          <object class="AdwStatusPage">
+            <property name="icon-name">folder-remote-symbolic</property>
+            <property name="title">Proton Drive</property>
+            <property name="description">Securely access your encrypted files.</property>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <property name="spacing">10</property>
+                <property name="halign">center</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="orientation">horizontal</property>
+                    <property name="spacing">10</property>
+                    <property name="halign">center</property>
+                    
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label">Mount Drive</property>
+                        <style>
+                          <class name="heading"/>
+                        </style>
+                      </object>
+                    </child>
+                    
+                    <child>
+                      <object class="GtkSwitch" id="mount_switch">
+                        <property name="valign">center</property>
+                        <property name="sensitive">False</property> <!-- Disabled until logged in -->
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkLabel" id="user_label">
+                    <property name="label"></property>
+                    <property name="visible">False</property>
+                    <style>
+                      <class name="title-2"/>
+                    </style>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkLabel" id="status_label">
+                    <property name="label">Status: Disconnected</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkButton" id="connect_button">
+                    <property name="label">Manage Account</property>
+                    <style>
+                      <class name="flat"/>
+                    </style>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">6</property>
+                    <property name="margin-top">12</property>
+                    
+                    <child>
+                      <object class="GtkLabel" id="quota_label">
+                        <property name="label">Storage Usage</property>
+                        <property name="xalign">0</property>
+                        <style>
+                          <class name="dim-label"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLevelBar" id="quota_bar">
+                        <property name="min-value">0</property>
+                        <property name="max-value">1</property>
+                        <property name="value">0</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkBox">
+                    <property name="orientation">horizontal</property>
+                    <property name="spacing">12</property>
+                    <property name="margin-top">12</property>
+                    <property name="margin-bottom">12</property>
+                    
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label">Start on Login</property>
+                        <property name="hexpand">true</property>
+                        <property name="xalign">0</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkSwitch" id="autostart_switch">
+                        <property name="valign">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkExpander">
+                    <property name="label">Show Logs</property>
+                    <child>
+                      <object class="GtkScrolledWindow">
+                        <property name="height-request">150</property>
+                        <property name="propagate-natural-height">True</property>
+                        <child>
+                          <object class="GtkTextView" id="log_view">
+                            <property name="editable">False</property>
+                            <property name="monospace">True</property>
+                            <property name="wrap-mode">word</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </property>
+      </object>
+    </property>
+  </object>
+
+  <object class="GtkWindow" id="LoginWindow">
+    <property name="title">Login to Proton Drive</property>
+    <property name="modal">True</property>
+    <property name="transient-for">ProtonDriveWindow</property>
+    <property name="default-width">400</property>
+    <property name="default-height">300</property>
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <property name="spacing">20</property>
+        <property name="margin-top">30</property>
+        <property name="margin-bottom">30</property>
+        <property name="margin-start">30</property>
+        <property name="margin-end">30</property>
+        
+        <child>
+          <object class="GtkLabel">
+            <property name="label">Enter your Proton credentials</property>
+            <style>
+              <class name="title-2"/>
+            </style>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkEntry" id="username_entry">
+            <property name="placeholder-text">Username (e.g. user@proton.me)</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkPasswordEntry" id="password_entry">
+            <property name="placeholder-text">Password</property>
+            <property name="show-peek-icon">True</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkEntry" id="2fa_entry">
+            <property name="placeholder-text">2FA Code (Optional)</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkButton" id="login_confirm_button">
+            <property name="label">Login</property>
+            <style>
+              <class name="suggested-action"/>
+              <class name="pill"/>
+            </style>
+          </object>
+        </child>
+        
+        <child>
+          <object class="GtkLabel" id="login_status_label">
+            <property name="label"></property>
+            <property name="visible">False</property>
+            <style>
+              <class name="error"/>
+            </style>
+          </object>
+        </child>
+
+      </object>
+    </child>
+  </object>
+</interface>

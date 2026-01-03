@@ -1,0 +1,48 @@
+{
+    "app-id": "org.example.protondrive",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "45",
+    "sdk": "org.gnome.Sdk",
+    "command": "protondrive",
+    "finish-args": [
+        "--share=ipc",
+        "--socket=fallback-x11",
+        "--socket=wayland",
+        "--device=all",
+        "--filesystem=home",
+        "--talk-name=org.freedesktop.Notifications"
+    ],
+    "modules": [
+        {
+            "name": "rclone",
+            "buildsystem": "simple",
+            "build-commands": [
+                "install -D rclone /app/bin/rclone"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://downloads.rclone.org/v1.65.0/rclone-v1.65.0-linux-amd64.zip",
+                    "sha256": "5c5ad62d294025a17637257df8903c73491ba90ca76572e9ddcaecae7030cfd2",
+                    "strip-components": 1
+                }
+            ]
+        },
+        {
+            "name": "protondrive",
+            "buildsystem": "simple",
+            "build-commands": [
+                "install -D src/main.py /app/bin/protondrive",
+                "install -D src/controller.py /app/bin/controller.py",
+                "install -D src/interface.ui /app/bin/interface.ui",
+                "chmod +x /app/bin/protondrive"
+            ],
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": "."
+                }
+            ]
+        }
+    ]
+}

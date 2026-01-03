@@ -1,0 +1,30 @@
+name: Build Flatpak
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  flatpak:
+    runs-on: ubuntu-latest
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:gnome-45
+      options: --privileged
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Clone rclone
+      run: |
+        # We need to manually download rclone source or binary if checking out
+        # But the manifest handles download. We just need to ensure the build context is right.
+        ls -la
+
+    - name: Build Flatpak
+      uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v6
+      with:
+        bundle: org.example.protondrive.flatpak
+        manifest-path: org.example.protondrive.json
+        cache-key: flatpak-builder-${{ github.sha }}
